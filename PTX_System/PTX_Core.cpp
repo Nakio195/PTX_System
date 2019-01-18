@@ -104,6 +104,8 @@ unsigned int PTX_Core::getColorsNumber()
     return DetectedColors.size();
 }
 
+
+
 void PTX_Core::RGB_Correction()
 {
     // RGB on the fly correction
@@ -193,7 +195,6 @@ void PTX_Core::UpdateColorWheel()
     }
 
     cv::cvtColor(ColorWheel, ColorWheel, cv::COLOR_HSV2BGR);
-    //cv::cvtColor(ColorWheel, ColorWheel, cv::COLOR_BGR2RGB);
 }
 
 void PTX_Core::FindObjects()
@@ -228,12 +229,10 @@ void PTX_Core::FindObjects()
 
         if(DetectedColors[i]->Objects.size() > 0 && DetectedColors[i]->Polygons.size() > 0)
         {
-            std::system("cls");
             if(static_cast<unsigned int>(ObjectSelect) < DetectedColors[i]->Objects.size())
             {
                 for(unsigned int j = 0; j < DetectedColors[i]->Objects[static_cast<unsigned int>(ObjectSelect)].size(); j++)
                 {
-                    std::cout << static_cast<int>(DetectedColors[i]->Objects[static_cast<unsigned int>(ObjectSelect)][j]) << std::endl;
                     cv::Scalar color = cv::Scalar(DetectedColors[i]->MainHue, 255, 255);
                     cv::drawContours(Objects, DetectedColors[i]->Polygons, static_cast<int>(DetectedColors[i]->Objects[static_cast<unsigned int>(ObjectSelect)][j]), color);
                 }
